@@ -190,7 +190,7 @@ if page == "🏠 Home":
         sample_docs = sorted(
             [
             file
-            for file in os.listdir(dataset)
+            for file in os.listdir(dataset_folder)
             if file.endswith(".txt")
             ],
             key=lambda x: int(
