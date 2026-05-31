@@ -1,0 +1,1 @@
+Information Retrieval deals with searching and retrieving relevant documents from large collections. Search engines use indexing techniques and ranking algorithms to improve retrieval effectiveness.

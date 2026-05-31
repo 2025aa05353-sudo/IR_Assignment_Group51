@@ -1,0 +1,1 @@
+Natural Language Processing allows computers to understand and generate human language. NLP applications include text classification, machine translation, sentiment analysis, and question answering systems.

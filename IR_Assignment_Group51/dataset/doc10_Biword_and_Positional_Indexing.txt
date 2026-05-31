@@ -1,0 +1,1 @@
+Phrase queries can be processed using biword indexes or positional indexes. Positional indexes store word locations and generally provide more accurate phrase matching results.

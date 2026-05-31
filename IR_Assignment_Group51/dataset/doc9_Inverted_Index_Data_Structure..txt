@@ -1,0 +1,1 @@
+An inverted index is a data structure used in information retrieval systems. It maps terms to the documents in which they appear, enabling efficient search operations.

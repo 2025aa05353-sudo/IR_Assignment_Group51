@@ -1,0 +1,1 @@
+Computer Vision focuses on enabling machines to interpret visual information from images and videos. Object detection, image classification, and facial recognition are common computer vision applications.

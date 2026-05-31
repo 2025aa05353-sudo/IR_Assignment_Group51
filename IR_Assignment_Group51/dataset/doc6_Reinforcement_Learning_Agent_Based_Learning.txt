@@ -1,0 +1,1 @@
+Reinforcement Learning is a machine learning technique where an agent learns through interaction with an environment. The agent receives rewards and penalties and improves its behavior over time.

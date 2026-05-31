@@ -1,0 +1,1 @@
+Text preprocessing is an important step in natural language processing. Common preprocessing techniques include tokenization, lowercasing, stop word removal, stemming, and lemmatization.
