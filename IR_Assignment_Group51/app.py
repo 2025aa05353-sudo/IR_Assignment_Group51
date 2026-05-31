@@ -185,7 +185,10 @@ if page == "🏠 Home":
 
     else:
 
-        dataset_folder = "dataset"
+        #dataset_folder = "dataset"
+
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        dataset_folder = os.path.join(BASE_DIR, "dataset")
 
         sample_docs = sorted(
             [
