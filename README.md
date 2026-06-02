@@ -27,7 +27,7 @@ Open a terminal in the project folder and run:
 pip install -r requirements.txt
 ```
 
-If a `requirements.txt` file is not available, install the required libraries manually:
+OR install the required libraries manually:
 
 ```bash
 pip install streamlit pandas nltk
