@@ -51,6 +51,8 @@ def show_preprocessing_page():
 
     st.title("⚙️ Part B : Text Preprocessing")
 
+    st.warning("⚠️ **CRITICAL NOTE:** You **MUST** go to **PART B, Part C, Part D and Part E** after text file selection on **Home page** and actively select preprocessing option first! Otherwise, some of page can display stale cache states.")
+
     st.markdown("""
     ### Part B : Text Preprocessing
 
@@ -93,7 +95,7 @@ def show_preprocessing_page():
     )
 
     # ==================================================
-    # Select Preprocessing Technique
+    # Select Preprocessing Technique 
     # ==================================================
 
     preprocessing_option = st.radio(
@@ -101,6 +103,7 @@ def show_preprocessing_page():
         [
             "Tokenization",
             "Lowercasing",
+            "Stop Words List",
             "Stop Word Removal",
             "Hyphen Handling",
             "Stemming",
@@ -224,6 +227,47 @@ def show_preprocessing_page():
         )
 
     # ==================================================
+    # Stop Words List 
+    # ==================================================
+
+    elif preprocessing_option == "Stop Words List":
+
+        st.subheader("🗂️ Document-Specific Stop Words Analysis")
+
+        # Extract stop words localized inside the specific active text target
+        words_in_doc = [t.lower() for t in tokens if t.isalpha()]
+        stop_words_found_in_doc = [w for w in words_in_doc if w in stop_words]
+        
+        from collections import Counter
+        stop_word_counts = Counter(stop_words_found_in_doc)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric(
+                label="Total Stop Word Occurrences in File",
+                value=len(stop_words_found_in_doc)
+            )
+        with col2:
+            st.metric(
+                label="Unique Stop Word Types Identified",
+                value=len(stop_word_counts)
+            )
+
+        if stop_word_counts:
+            stop_breakdown = pd.DataFrame({
+                "Intercepted Stop Word": list(stop_word_counts.keys()),
+                "Frequency in This Document": list(stop_word_counts.values())
+            }).sort_values(by="Frequency in This Document", ascending=False)
+            
+            stop_breakdown.index = [str(i) for i in range(1, len(stop_breakdown) + 1)]
+
+            st.dataframe(stop_breakdown, use_container_width=True)
+        else:
+            st.info("No standard English stop words were detected in this specific document text.")
+            
+        st.caption(f"ℹ️ Analysis run against the global vocabulary filter set across: `{selected_doc}`")
+
+    # ==================================================
     # Stop Word Removal
     # ==================================================
 
@@ -285,13 +329,14 @@ def show_preprocessing_page():
             len(set(stemmed_tokens))
         )
 
-        stem_df = pd.DataFrame({
+        skinny_df = pd.DataFrame({
             "Original": filtered_tokens[:30],
             "Stemmed": stemmed_tokens[:30]
         })
+        skinny_df.index = [str(i) for i in range(1, len(skinny_df) + 1)]
 
         st.dataframe(
-            stem_df,
+            skinny_df,
             use_container_width=True
         )
         
@@ -310,13 +355,14 @@ def show_preprocessing_page():
             len(set(lemmatized_tokens))
         )
 
-        lemma_df = pd.DataFrame({
+        skinny_df = pd.DataFrame({
             "Original": filtered_tokens[:30],
             "Lemmatized": lemmatized_tokens[:30]
         })
+        skinny_df.index = [str(i) for i in range(1, len(skinny_df) + 1)]
 
         st.dataframe(
-            lemma_df,
+            skinny_df,
             use_container_width=True
         )
         
@@ -349,6 +395,7 @@ def show_preprocessing_page():
             lemmatized_tokens[:comparison_size]
 
         })
+        comparison_df.index = [str(i) for i in range(1, len(comparison_df) + 1)]
 
         st.dataframe(
             comparison_df,
@@ -471,7 +518,6 @@ which may improve retrieval efficiency for this dataset.
 
         st.subheader("Inverted Index Creation")
 
-        # Visualizing the stored state data cleanly for the report snapshot
         inverted_df = pd.DataFrame(
             [
                 [term, ", ".join(postings)] 
@@ -483,6 +529,7 @@ which may improve retrieval efficiency for this dataset.
                 "Posting List"
             ]
         )
+        inverted_df.index = [str(i) for i in range(1, len(inverted_df) + 1)]
 
         st.metric(
             "Unique Terms",
