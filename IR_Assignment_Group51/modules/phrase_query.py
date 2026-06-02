@@ -115,6 +115,8 @@ def show_phrase_query_page():
 
     st.title("📌 Part C : Phrase Query Processing Implementation")
 
+    st.warning("⚠️ **CRITICAL NOTE:** You **MUST** go to **PART B, Part C, Part D and Part E** after text file selection on **Home page** and actively select preprocessing option first! Otherwise, some of page can display stale cache states.")
+
     st.markdown("""
     ### Part C : Phrase Query Processing
 
