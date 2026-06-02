@@ -5,6 +5,9 @@ def show_inference_page():
 
     st.title("📝 Part G : Inference & Discussion")
 
+# ADD THE BANNER HERE:
+    st.warning("⚠️ **CRITICAL NOTE:** You **MUST** go to **PART B, Part C, Part D and Part E** after text file selection on **Home page** and actively select preprocessing option first! Otherwise, some of page can display stale cache states.")
+
     st.markdown("""
     ### Part G : Inference and Discussion
 
@@ -52,6 +55,8 @@ def show_inference_page():
     # ==================================================
     st.divider()
     st.header("📊 Current Experimental Baseline Summary")
+
+    st.warning("⚠️ **CRITICAL NOTE:** You **MUST** go to **PART B, PART C, PART D and PART E** and actively select preprocessing option first! Otherwise, this page will display an incorrect or un-normalized output based on stale cache states.")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -86,6 +91,30 @@ def show_inference_page():
     # ==================================================
     st.header("📋 Technical Architecture Comparison Matrix")
 
+    #Fallback / Safely fetch actual session state configurations
+    prep_config = st.session_state.get("prep_config", {})
+    norm_used = prep_config.get("norm", None)
+
+    # Dynamic string assignment depending on Part B status
+    if norm_used == "Stemming":
+        empirical_choice_b = "Stemming Model Focus"
+        justification_b = f"Successfully compiled {len(documents)} active files down to {vocab_size} distinct terms using stemming rules."
+    elif norm_used == "Lemmatization":
+        empirical_choice_b = "Lemmatization Model Focus"
+        justification_b = f"Successfully compiled {len(documents)} active files down to {vocab_size} distinct terms using lemmatization rules."
+    else:
+        # Fallback if user hasn't actively interacted with normalization steps yet
+        empirical_choice_b = "⚠️ Select Stemming/Lemmatization in Part B"
+        justification_b = "⚠️ Awaiting structural execution parameters from Part B preprocessing Page."
+
+    inverted_index = st.session_state.get("inverted_index", {})
+    vocab_size = len(inverted_index)
+
+
+    # Calculate unique terms dynamically if index exists
+    total_vocab = len(st.session_state.get("inverted_index", {}))
+    vocab_str = f" ({total_vocab} unique terms)" if total_vocab > 0 else ""
+
     summary_metrics_data = {
         "Assigned Module": [
             "Part B: Core Preprocessing",
@@ -102,17 +131,17 @@ def show_inference_page():
         ],
 
         "Empirical Selection Choice": [
-            "Lemmatization",
+            empirical_choice_b,
             "Positional Index",
             "B-Tree",
             "Hybrid Tolerant Retrieval Model"
         ],
 
         "Systemic Advantage & Architectural Justification": [
-            "Preserves valid dictionary words and semantic meaning.",
-            "Provides highly accurate phrase retrieval by validating sequential token positions.",
-            "Maintains balanced search performance and scales efficiently.",
-            "Combines multiple correction techniques for robust query processing."
+            justification_b,
+            f"Provides highly accurate phrase retrieval by validating sequential token positions across {vocab_size}.",
+            f"Maintains balanced search performance and scales efficiently for all {vocab_size} vocabulary keys.",
+            f"Indexed {vocab_size} terms using multiple correction techniques for robust query processing as mentioned."
         ]
     }
 
