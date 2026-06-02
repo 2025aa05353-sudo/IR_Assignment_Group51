@@ -124,6 +124,7 @@ Users can select:
 
 * Tokenization
 * Lowercasing
+* Stop Words List
 * Stop Word Removal
 * Hyphen Handling
 * Stemming
