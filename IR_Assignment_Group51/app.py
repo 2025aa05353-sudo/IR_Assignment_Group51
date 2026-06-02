@@ -43,6 +43,7 @@ page = st.sidebar.radio(
 if page == "🏠 Home":
 
     st.title("🔍 Information Retrieval - upload text file")
+    st.warning("⚠️ **CRITICAL NOTE:** You **MUST** go to **PART B, Part C, Part D and Part E** after text file selection on **Home page** and actively select preprocessing option first! Otherwise, some of page can display stale cache states.")
     st.subheader("Group Number : 51")
     st.subheader("Scroll down to end to Upload text files")
 
@@ -185,8 +186,8 @@ if page == "🏠 Home":
 
     else:
 
-        #dataset_folder = "dataset"
-
+        dataset_folder = "dataset"
+        
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         dataset_folder = os.path.join(BASE_DIR, "dataset")
 
