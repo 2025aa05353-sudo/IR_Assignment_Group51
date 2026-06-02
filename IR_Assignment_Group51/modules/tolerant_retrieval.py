@@ -109,7 +109,7 @@ def get_soundex_code(term):
 def show_tolerant_retrieval_page():
 
     st.title("🛠 Part E : Tolerant Retrieval")
-
+    st.warning("⚠️ **CRITICAL NOTE:** You **MUST** go to **PART B, Part C, Part D and Part E** after text file selection on **Home page** and actively select preprocessing option first! Otherwise, some of page can display stale cache states.")
     st.markdown("""
     ### Part E : Tolerant Retrieval
 
