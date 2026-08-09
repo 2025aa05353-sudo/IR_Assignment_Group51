@@ -1,0 +1,10 @@
+# ==============================================================================
+# Streamlit Server Configuration
+# Location: .streamlit/config.toml
+# ==============================================================================
+
+[server]
+# Purpose: Sets the maximum allowed file upload size for st.file_uploader to 20MB
+# 1. Updates the UI text in the upload box to "20MB per file".
+# 2. Rejects files larger than 20MB at the server level to prevent memory overload.
+maxUploadSize = 20
